@@ -19,11 +19,11 @@ spring.datasource.password=root
 
 ## documentation
 
-## api
+### api
 
 Api documentation is found under [localhost:8080/docs](http://localhost:8080/docs)
 
-## auth
+### auth
 
 The auth protocol is oAuth3.0 (it stands for `Oli Authentication 3.0`). Login steps:
 
