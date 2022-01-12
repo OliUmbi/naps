@@ -7,6 +7,8 @@ import ch.bbbaden.naps.security.daos.SecurityAccountDAO;
 import ch.bbbaden.naps.security.daos.SecurityTokenDAO;
 import ch.bbbaden.naps.security.dtos.token.request.SecurityRequestAccessTokenDTO;
 import ch.bbbaden.naps.security.dtos.token.request.SecurityRequestRefreshTokenDTO;
+import ch.bbbaden.naps.security.dtos.token.response.SecurityResponseAccessTokenDTO;
+import ch.bbbaden.naps.security.dtos.token.response.SecurityResponseRefreshTokenDTO;
 import ch.bbbaden.naps.security.mappers.SecurityTokenMapper;
 import ch.bbbaden.naps.security.parent.AbstractSecurityService;
 import ch.bbbaden.naps.security.repositories.SecurityAccountRepository;
@@ -36,11 +38,11 @@ public class SecurityTokenService extends AbstractSecurityService {
 		this.tokenMapper = tokenMapper;
 	}
 	
-	public ResponseEntity<Object> getAll () {
+	public ResponseEntity<Iterable<SecurityTokenDAO>> getAll () {
 		return ResponseEntity.ok().body(tokenRepository.findAll());
 	}
 	
-	public ResponseEntity<Object> login (SecurityRequestAccessTokenDTO accessTokenDTO) {
+	public ResponseEntity<SecurityResponseAccessTokenDTO> login (SecurityRequestAccessTokenDTO accessTokenDTO) {
 		
 		SecurityAccountDAO accountDAO = login(accessTokenDTO.getEmail(), accessTokenDTO.getPassword());
 		
@@ -57,7 +59,7 @@ public class SecurityTokenService extends AbstractSecurityService {
 		return ResponseEntity.ok().body(tokenMapper.mapSecurityTokenDAOToSecurityResponseAccessTokenDTO(tokenDAO));
 	}
 	
-	public ResponseEntity<Object> refresh (SecurityRequestRefreshTokenDTO refreshTokenDTO) {
+	public ResponseEntity<SecurityResponseRefreshTokenDTO> refresh (SecurityRequestRefreshTokenDTO refreshTokenDTO) {
 		
 		SecurityTokenDAO tokenDAO = tokenRepository.findByRefresh(refreshTokenDTO.getRefresh())
 				.orElseThrow(() -> new TokenNotFoundException(refreshTokenDTO.getRefresh()));
@@ -70,7 +72,7 @@ public class SecurityTokenService extends AbstractSecurityService {
 		return ResponseEntity.ok().body(tokenMapper.mapSecurityTokenDAOToSecurityResponseRefreshTokenDTO(tokenDAO));
 	}
 	
-	public ResponseEntity<Object> delete (SecurityRequestRefreshTokenDTO refreshTokenDTO) {
+	public ResponseEntity<MessageDTO> delete (SecurityRequestRefreshTokenDTO refreshTokenDTO) {
 		SecurityTokenDAO tokenDAO = tokenRepository.findByRefresh(refreshTokenDTO.getRefresh())
 				.orElseThrow(() -> new TokenNotFoundException(refreshTokenDTO.getRefresh()));
 		

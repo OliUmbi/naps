@@ -1,5 +1,7 @@
 package ch.bbbaden.naps.security.controllers;
 
+import ch.bbbaden.naps.dtos.MessageDTO;
+import ch.bbbaden.naps.security.daos.SecurityAccountDAO;
 import ch.bbbaden.naps.security.dtos.account.SecurityChangeAccountDTO;
 import ch.bbbaden.naps.security.dtos.account.SecurityCreateAccountDTO;
 import ch.bbbaden.naps.security.services.SecurityAccountService;
@@ -22,25 +24,25 @@ public class SecurityAccountController {
 	
 	@Operation(summary = "get all accounts")
 	@GetMapping("/account")
-	private ResponseEntity<Object> getAll () {
+	private ResponseEntity<Iterable<SecurityAccountDAO>> getAll () {
 		return securityAccountService.getAll();
 	}
 	
 	@Operation(summary = "Create account")
 	@PostMapping("/account")
-	private ResponseEntity<Object> login (@RequestBody SecurityCreateAccountDTO securityCreateAccountDTO) {
+	private ResponseEntity<MessageDTO> login (@RequestBody SecurityCreateAccountDTO securityCreateAccountDTO) {
 		return securityAccountService.create(securityCreateAccountDTO);
 	}
 	
 	@Operation(summary = "Change account details")
 	@PutMapping("/account")
-	private ResponseEntity<Object> refresh (@RequestBody SecurityChangeAccountDTO securityChangeAccountDTO) {
+	private ResponseEntity<MessageDTO> refresh (@RequestBody SecurityChangeAccountDTO securityChangeAccountDTO) {
 		return securityAccountService.update(securityChangeAccountDTO);
 	}
 	
 	@Operation(summary = "Delete account")
 	@DeleteMapping("/account")
-	private ResponseEntity<Object> delete (@RequestBody SecurityCreateAccountDTO securityCreateAccountDTO) {
+	private ResponseEntity<MessageDTO> delete (@RequestBody SecurityCreateAccountDTO securityCreateAccountDTO) {
 		return securityAccountService.delete(securityCreateAccountDTO);
 	}
 }

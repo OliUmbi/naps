@@ -32,11 +32,11 @@ public class SecurityAccountService extends AbstractSecurityService {
 		this.roleRepository = roleRepository;
 	}
 	
-	public ResponseEntity<Object> getAll () {
+	public ResponseEntity<Iterable<SecurityAccountDAO>> getAll () {
 		return ResponseEntity.ok().body(accountRepository.findAll());
 	}
 	
-	public ResponseEntity<Object> create (SecurityCreateAccountDTO createAccountDTO) {
+	public ResponseEntity<MessageDTO> create (SecurityCreateAccountDTO createAccountDTO) {
 		ValidationUtil.checkIfEmailIsValid(createAccountDTO.getEmail());
 		ValidationUtil.checkIfPasswordIsValid(createAccountDTO.getPassword());
 		
@@ -55,7 +55,7 @@ public class SecurityAccountService extends AbstractSecurityService {
 		return ResponseEntity.ok().body(new MessageDTO("Successfully created account"));
 	}
 	
-	public ResponseEntity<Object> update (SecurityChangeAccountDTO changeAccountDTO) {
+	public ResponseEntity<MessageDTO> update (SecurityChangeAccountDTO changeAccountDTO) {
 		
 		SecurityAccountDAO accountDAO = login(changeAccountDTO.getEmail(), changeAccountDTO.getPassword());
 		
@@ -66,7 +66,7 @@ public class SecurityAccountService extends AbstractSecurityService {
 		return ResponseEntity.ok().body(new MessageDTO("Successfully changed password"));
 	}
 	
-	public ResponseEntity<Object> delete (SecurityCreateAccountDTO createAccountDTO) {
+	public ResponseEntity<MessageDTO> delete (SecurityCreateAccountDTO createAccountDTO) {
 		
 		SecurityAccountDAO accountDAO = login(createAccountDTO.getEmail(), createAccountDTO.getPassword());
 		

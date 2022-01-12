@@ -1,7 +1,11 @@
 package ch.bbbaden.naps.security.controllers;
 
+import ch.bbbaden.naps.dtos.MessageDTO;
+import ch.bbbaden.naps.security.daos.SecurityTokenDAO;
 import ch.bbbaden.naps.security.dtos.token.request.SecurityRequestAccessTokenDTO;
 import ch.bbbaden.naps.security.dtos.token.request.SecurityRequestRefreshTokenDTO;
+import ch.bbbaden.naps.security.dtos.token.response.SecurityResponseAccessTokenDTO;
+import ch.bbbaden.naps.security.dtos.token.response.SecurityResponseRefreshTokenDTO;
 import ch.bbbaden.naps.security.services.SecurityTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,26 +27,25 @@ public class SecurityTokenController {
 	
 	@Operation(summary = "get all tokens")
 	@GetMapping("/token")
-	private ResponseEntity<Object> gelAll () {
+	private ResponseEntity<Iterable<SecurityTokenDAO>> gelAll () {
 		return securityTokenService.getAll();
 	}
 	
 	@Operation(summary = "Login with email + password")
 	@PostMapping("/token")
-	private ResponseEntity<Object> login (@RequestBody SecurityRequestAccessTokenDTO accessTokenDTO) {
+	private ResponseEntity<SecurityResponseAccessTokenDTO> login (@RequestBody SecurityRequestAccessTokenDTO accessTokenDTO) {
 		return securityTokenService.login(accessTokenDTO);
 	}
 	
 	@Operation(summary = "Refresh access token")
 	@PutMapping("/token")
-	private ResponseEntity<Object> refresh (@RequestBody SecurityRequestRefreshTokenDTO refreshTokenDTO) {
+	private ResponseEntity<SecurityResponseRefreshTokenDTO> refresh (@RequestBody SecurityRequestRefreshTokenDTO refreshTokenDTO) {
 		return securityTokenService.refresh(refreshTokenDTO);
 	}
 	
 	@Operation(summary = "Delete token for logout")
 	@DeleteMapping("/token")
-	private ResponseEntity<Object> delete (@RequestBody SecurityRequestRefreshTokenDTO refreshTokenDTO) {
+	private ResponseEntity<MessageDTO> delete (@RequestBody SecurityRequestRefreshTokenDTO refreshTokenDTO) {
 		return securityTokenService.delete(refreshTokenDTO);
 	}
-	
 }
