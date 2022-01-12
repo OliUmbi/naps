@@ -1,6 +1,7 @@
 package ch.bbbaden.naps.api.controllers;
 
 import ch.bbbaden.naps.api.services.PingService;
+import ch.bbbaden.naps.dtos.MessageDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class PingController {
 	
 	@Operation(summary = "Ping")
 	@GetMapping("/ping")
-	public ResponseEntity<Object> ping (@RequestHeader("auth") String auth) {
+	public ResponseEntity<MessageDTO> ping (@RequestHeader("auth") String auth) {
 		return pingService.ping(auth);
 	}
 }

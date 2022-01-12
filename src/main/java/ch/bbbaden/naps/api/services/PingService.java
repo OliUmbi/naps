@@ -13,7 +13,7 @@ public class PingService extends AbstractService {
 		super(tokenRepository);
 	}
 	
-	public ResponseEntity<Object> ping (String auth) {
+	public ResponseEntity<MessageDTO> ping (String auth) {
 		authenticate(auth, "ping", false);
 		
 		MessageDTO messageDTO = new MessageDTO("Pong");
