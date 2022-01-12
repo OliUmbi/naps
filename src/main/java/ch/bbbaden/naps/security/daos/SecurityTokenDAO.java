@@ -16,7 +16,7 @@ public class SecurityTokenDAO {
 	@Column(name = "id")
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "account")
 	private SecurityAccountDAO account;
 	

@@ -21,7 +21,7 @@ public class SecurityAccountDAO {
 	@Column(name = "password")
 	private String password;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "role")
 	private SecurityRoleDAO role;
 }

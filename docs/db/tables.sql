@@ -43,23 +43,15 @@ create table security_roles_access
 
 -- foreign keys
 alter table security_accounts
-    add foreign key (role) references security_roles (id)
-        on update no action
-        on delete no action;
+    add foreign key (role) references security_roles (id);
 
 alter table security_tokens
-    add foreign key (account) references security_accounts (id)
-        on update no action
-        on delete no action;
+    add foreign key (account) references security_accounts (id);
 
 alter table security_roles_access
-    add foreign key (role) references security_roles (id)
-        on update no action
-        on delete no action;
+    add foreign key (role) references security_roles (id);
 alter table security_roles_access
-    add foreign key (access) references security_access (id)
-        on update no action
-        on delete no action;
+    add foreign key (access) references security_access (id);
 
 -- unique
 alter table security_accounts
