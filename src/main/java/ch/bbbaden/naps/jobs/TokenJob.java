@@ -12,7 +12,7 @@ public class TokenJob {
 
     public static final Logger logger = LoggerFactory.getLogger(TokenJob.class);
 
-    private SecurityTokenRepository securityTokenRepository;
+    private final SecurityTokenRepository securityTokenRepository;
 
     @Autowired
     public TokenJob(SecurityTokenRepository securityTokenRepository) {
