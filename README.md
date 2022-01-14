@@ -39,7 +39,11 @@ ask oli
 ## todo
 
 - [X] breaking prod
-- [ ] api implementation
-- [ ] angular auth
-- [ ] shenanigans
-
+- [x] api implementation
+- [x] angular auth
+- [x] shenanigans
+- [x] jobs
+- [ ] logging
+- [ ] naming + structure
+- [ ] websockets
+- [ ] api docs + health + actuator

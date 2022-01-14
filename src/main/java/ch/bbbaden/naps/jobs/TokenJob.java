@@ -15,12 +15,8 @@ public class TokenJob {
         this.securityTokenRepository = securityTokenRepository;
     }
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(cron = "0 0 12 * * ?")
     public void deleteOldTokens() {
-        /* not implemented yet */
-
-//        Date now = new Date();
-//        boolean result = securityTokenRepository.deleteByExpiresAtBefore(new Date(now.getTime() - 86400000));
-//        System.out.println(result);
+        securityTokenRepository.deleteByExpiresFromYesterday();
     }
 }
