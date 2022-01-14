@@ -15,9 +15,7 @@ public class PingService extends AbstractService {
 	
 	public ResponseEntity<MessageDTO> ping (String auth) {
 		authenticate(auth, "ping", false);
-		
-		MessageDTO messageDTO = new MessageDTO("Pong");
-		
-		return ResponseEntity.ok().body(messageDTO);
+
+		return ResponseEntity.ok().body(new MessageDTO("Pong"));
 	}
 }
