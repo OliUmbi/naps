@@ -43,7 +43,7 @@ ask oli
 - [x] angular auth
 - [x] shenanigans
 - [x] jobs
-- [ ] logging
+- [x] logging
 - [ ] naming + structure
 - [ ] websockets
 - [ ] api docs + health + actuator
