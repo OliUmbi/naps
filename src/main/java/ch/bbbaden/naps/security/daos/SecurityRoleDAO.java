@@ -20,7 +20,7 @@ public class SecurityRoleDAO {
 	@Column(name = "role", unique = true)
 	private String role;
 	
-	@ManyToMany(cascade = CascadeType.DETACH)
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "security_roles_access",
 			joinColumns = @JoinColumn(name = "role"),
